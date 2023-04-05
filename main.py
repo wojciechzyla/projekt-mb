@@ -102,6 +102,20 @@ def number_of_orders_according_to_date_plot():
     plt.bar(df_data_orders["Date"], df_data_orders["Orders"])
     plt.show()
 
+def objects_interaction_oid(oid):
+    print("Chosen object interaction summary:")
+    ocel_ = pm4py.ocel_objects_interactions_summary(ocel)
+    ocel_=ocel_[ocel_["ocel:oid"] == oid]
+    print(ocel_)
+    
+def related_objects_for_event(eid):
+    oc = pm4py.ocel_objects_ot_count(ocel)[eid]
+    print(f'Related objects for chosen event: {oc}')
+    
+def show_objects_terminated(obj_type):
+    print("Chosen objects type termination:")
+    oc = pm4py.filtering.filter_ocel_end_events_per_object_type(ocel, obj_type).get_extended_table()
+    print(oc)
 
 #===========TYPE AND ACTIVITIES DEPENDENCY HANDLING==============
 def relations_with_object_type_and_activities(type, activity):
@@ -132,6 +146,9 @@ relations_customer = interact(relations_with_customer, customer=ocel.objects[oce
 relations_object_type = interact(relations_with_object_type_and_activities, type=object_type_dropdown, activity = activity_dropdown)
 number_of_orders = interact(number_of_orders_according_to_date, date = ocel.get_extended_table()["ocel:timestamp"].dt.date.drop_duplicates())
 plot_number_of_orders = interact(number_of_orders_according_to_date_plot)
+obj_interaction = interact(objects_interaction_oid, oid = "880001")
+rel_obj_for_event = interact(related_objects_for_event, eid = '1.0')
+when_objects_terminated = interact(show_objects_terminated, obj_type = pm4py.ocel_get_object_types(ocel))
 
 
 
