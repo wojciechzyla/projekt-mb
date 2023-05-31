@@ -160,3 +160,5 @@ when_objects_terminated = interact(show_objects_terminated, obj_type = pm4py.oce
 # relations_eid2 = interact(show_relations_for_eid_and_object_type, eid=ocel.relations['ocel:eid'].drop_duplicates().values.tolist()[:20], type=pm4py.ocel_get_object_types(ocel))
 
 
+
+                                
