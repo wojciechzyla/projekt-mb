@@ -6,7 +6,7 @@ import ipywidgets as widgets
 from ipywidgets import interact
 import matplotlib.pyplot as plt
 
-
+#running-example
 log_path = "logs/running-example.jsonocel"
 ocel = pm4py.read_ocel_json(log_path)
 
